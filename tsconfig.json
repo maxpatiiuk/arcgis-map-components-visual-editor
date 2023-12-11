@@ -3,7 +3,6 @@
   "exclude": ["node_modules"],
   "compilerOptions": {
     /* Basic Options */
-    // "isolatedModules": true,
     "jsx": "react",
     "jsxFactory": "h",
     "lib": ["dom", "esnext"],
