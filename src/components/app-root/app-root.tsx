@@ -18,7 +18,6 @@ export class AppRoot {
           <stencil-router historyType="hash">
             <stencil-route-switch scrollTopOffset={0}>
               <stencil-route url="/" component="app-home" exact={true} />
-              <stencil-route url="/map-cdn/" component="app-map-cdn" />
               <stencil-route url="/map-npm/" component="app-map-npm" />
             </stencil-route-switch>
           </stencil-router>

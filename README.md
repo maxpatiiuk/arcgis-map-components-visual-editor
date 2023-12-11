@@ -1,5 +1,8 @@
 # Stencil App Starter
 
+A small demo app implementing a visual builder for the ArcGIS Maps SDK for
+JavaScript components
+
 > Note: if you are seeing this error when building the app:
 >
 > > An index signature parameter type must be either `string` or `number` in
