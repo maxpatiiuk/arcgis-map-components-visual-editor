@@ -5,12 +5,12 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults } from "@stencil-community/router";
 export namespace Components {
     interface AppHome {
     }
-    interface AppProfile {
-        "match": MatchResults;
+    interface AppMapCdn {
+    }
+    interface AppMapNpm {
     }
     interface AppRoot {
     }
@@ -22,11 +22,17 @@ declare global {
         prototype: HTMLAppHomeElement;
         new (): HTMLAppHomeElement;
     };
-    interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
+    interface HTMLAppMapCdnElement extends Components.AppMapCdn, HTMLStencilElement {
     }
-    var HTMLAppProfileElement: {
-        prototype: HTMLAppProfileElement;
-        new (): HTMLAppProfileElement;
+    var HTMLAppMapCdnElement: {
+        prototype: HTMLAppMapCdnElement;
+        new (): HTMLAppMapCdnElement;
+    };
+    interface HTMLAppMapNpmElement extends Components.AppMapNpm, HTMLStencilElement {
+    }
+    var HTMLAppMapNpmElement: {
+        prototype: HTMLAppMapNpmElement;
+        new (): HTMLAppMapNpmElement;
     };
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -36,21 +42,24 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
-        "app-profile": HTMLAppProfileElement;
+        "app-map-cdn": HTMLAppMapCdnElement;
+        "app-map-npm": HTMLAppMapNpmElement;
         "app-root": HTMLAppRootElement;
     }
 }
 declare namespace LocalJSX {
     interface AppHome {
     }
-    interface AppProfile {
-        "match"?: MatchResults;
+    interface AppMapCdn {
+    }
+    interface AppMapNpm {
     }
     interface AppRoot {
     }
     interface IntrinsicElements {
         "app-home": AppHome;
-        "app-profile": AppProfile;
+        "app-map-cdn": AppMapCdn;
+        "app-map-npm": AppMapNpm;
         "app-root": AppRoot;
     }
 }
@@ -59,7 +68,8 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
-            "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
+            "app-map-cdn": LocalJSX.AppMapCdn & JSXBase.HTMLAttributes<HTMLAppMapCdnElement>;
+            "app-map-npm": LocalJSX.AppMapNpm & JSXBase.HTMLAttributes<HTMLAppMapNpmElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
         }
     }

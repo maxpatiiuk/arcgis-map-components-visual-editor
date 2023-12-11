@@ -6,10 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#16161d" />
 
-    <script type="module" src="/build/app.esm.js"></script>
-    <script nomodule src="/build/app.js"></script>
-    <link href="/build/app.css" rel="stylesheet" />
-
+    <!-- <script type="module" src="/index.js"></script> -->
     <script
       type="module"
       src="https://js.arcgis.com/calcite-components/1.11.0/calcite.esm.js"
@@ -35,6 +32,17 @@
     <link rel="manifest" href="/manifest.json" />
   </head>
   <body>
-    <app-root></app-root>
+    <calcite-shell>
+      <calcite-navigation slot="header">
+        <calcite-navigation-logo slot="logo" />
+      </calcite-navigation>
+      <arcgis-map
+        item-id="e691172598f04ea8881cd2a4adaa45ba"
+        zoom="4"
+        style="height: 100%"
+      >
+        <arcgis-layer-list position="top-right" />
+      </arcgis-map>
+    </calcite-shell>
   </body>
 </html>

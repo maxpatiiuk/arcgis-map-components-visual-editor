@@ -10,6 +10,11 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "generate": "stencil generate"
   },
+  "dependencies": {
+    "@arcgis/core": "~4.28.0",
+    "@arcgis/map-components": ">=4.28.0-beta.39 < 4.29",
+    "@esri/calcite-components": "^1.9.2"
+  },
   "devDependencies": {
     "@stencil-community/router": "^1.0.2",
     "@stencil/core": "2.13.0",

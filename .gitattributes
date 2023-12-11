@@ -1,0 +1,33 @@
+# Set the default behavior, in case people don't have core.autocrlf set.
+* text=auto
+
+# Misc
+.gitignore text
+*.md text diff=markdown
+*.txt text
+LICENSE text -diff
+*.*rc text
+*.*ignore text
+
+# Data
+*.json text
+*.yaml text
+*.yml text
+
+# Web
+*.css text diff=css
+*.scss text diff=css
+*.html text diff=html
+*.map text -diff
+*.ts text
+*.tsx text
+package.json text eol=lf
+yarn.lock -diff
+
+# Stencil
+src/components.d.ts -diff
+
+# Don't convert CRLF to LF in localization files
+**/t9n/*.json text=auto
+FooterEsri Inc.
+Esri Inc.
