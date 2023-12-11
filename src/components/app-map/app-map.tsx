@@ -1,8 +1,8 @@
 import { Component, h } from '@stencil/core';
 
 @Component({
-  tag: 'app-map-npm',
-  styleUrl: 'app-map-npm.css',
+  tag: 'app-map',
+  styleUrl: 'app-map.css',
   shadow: false,
 })
 export class AppProfile {

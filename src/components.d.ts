@@ -8,6 +8,8 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
     interface AppHome {
     }
+    interface AppMap {
+    }
     interface AppMapNpm {
     }
     interface AppRoot {
@@ -19,6 +21,12 @@ declare global {
     var HTMLAppHomeElement: {
         prototype: HTMLAppHomeElement;
         new (): HTMLAppHomeElement;
+    };
+    interface HTMLAppMapElement extends Components.AppMap, HTMLStencilElement {
+    }
+    var HTMLAppMapElement: {
+        prototype: HTMLAppMapElement;
+        new (): HTMLAppMapElement;
     };
     interface HTMLAppMapNpmElement extends Components.AppMapNpm, HTMLStencilElement {
     }
@@ -34,6 +42,7 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
+        "app-map": HTMLAppMapElement;
         "app-map-npm": HTMLAppMapNpmElement;
         "app-root": HTMLAppRootElement;
     }
@@ -41,12 +50,15 @@ declare global {
 declare namespace LocalJSX {
     interface AppHome {
     }
+    interface AppMap {
+    }
     interface AppMapNpm {
     }
     interface AppRoot {
     }
     interface IntrinsicElements {
         "app-home": AppHome;
+        "app-map": AppMap;
         "app-map-npm": AppMapNpm;
         "app-root": AppRoot;
     }
@@ -56,6 +68,7 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
+            "app-map": LocalJSX.AppMap & JSXBase.HTMLAttributes<HTMLAppMapElement>;
             "app-map-npm": LocalJSX.AppMapNpm & JSXBase.HTMLAttributes<HTMLAppMapNpmElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
         }

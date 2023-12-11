@@ -8,7 +8,7 @@ export class AppHome {
   render() {
     return (
       <div class="app-home">
-        <stencil-route-link url="/map-npm/">
+        <stencil-route-link url="/map/">
           <calcite-button>Map NPM</calcite-button>
         </stencil-route-link>
       </div>
