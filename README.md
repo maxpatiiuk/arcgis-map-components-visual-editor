@@ -1,5 +1,12 @@
 # Stencil App Starter
 
+> Note: if you are seeing this error when building the app:
+>
+> > An index signature parameter type must be either `string` or `number` in
+> > `./node_modules/@types/babel__traverse/index.d.ts`
+>
+> [The workaround requires manually editing the type in node_modules](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/65766#issuecomment-1596187449)
+
 Stencil is a compiler for building fast web apps using Web Components.
 
 Stencil combines the best concepts of the most popular frontend frameworks into
