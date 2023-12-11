@@ -5,6 +5,7 @@
     /* Basic Options */
     "jsx": "react",
     "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "lib": ["dom", "esnext"],
     "module": "esnext",
     "sourceMap": true,
