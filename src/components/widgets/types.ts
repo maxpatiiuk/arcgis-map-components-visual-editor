@@ -1,4 +1,4 @@
-import { IR, RA, ValueOf } from '../../utils/types';
+import { IR, RA } from '../../utils/types';
 
 export type WidgetLayout = RA<WidgetDefinition>;
 
@@ -14,4 +14,8 @@ export const widgetPositions = [
   'top-left',
   'top-right',
 ] as const;
-export type WidgetPosition = ValueOf<typeof widgetPositions>;
+export type WidgetPosition =
+  | 'bottom-left'
+  | 'bottom-right'
+  | 'top-left'
+  | 'top-right';

@@ -46,7 +46,12 @@ export class VisWidgets {
               key={position}
               position={position}
             >
-              <calcite-button scale="m" iconStart="plus" />
+              <vis-add-widget
+                position={position}
+                onAdded={({ detail }): void =>
+                  void this.layoutChange.emit([...this.widgetLayout, detail])
+                }
+              />
             </vis-placement>
           ))}
       </div>

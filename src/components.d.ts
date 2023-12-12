@@ -5,13 +5,16 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { WidgetDefinition, WidgetLayout, WidgetPosition } from "./components/widgets/types";
 import { BaseMap } from "./components/map-selection/types";
 import { ArcGISMapView } from "@arcgis/map-components";
-import { WidgetDefinition, WidgetLayout, WidgetPosition } from "./components/widgets/types";
+export { WidgetDefinition, WidgetLayout, WidgetPosition } from "./components/widgets/types";
 export { BaseMap } from "./components/map-selection/types";
 export { ArcGISMapView } from "@arcgis/map-components";
-export { WidgetDefinition, WidgetLayout, WidgetPosition } from "./components/widgets/types";
 export namespace Components {
+    interface VisAddWidget {
+        "position": WidgetPosition;
+    }
     interface VisMap {
         "baseMap": BaseMap;
     }
@@ -33,6 +36,10 @@ export namespace Components {
         "widgetLayout": WidgetLayout;
     }
 }
+export interface VisAddWidgetCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVisAddWidgetElement;
+}
 export interface VisMapSelectionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVisMapSelectionElement;
@@ -46,6 +53,23 @@ export interface VisWidgetsCustomEvent<T> extends CustomEvent<T> {
     target: HTMLVisWidgetsElement;
 }
 declare global {
+    interface HTMLVisAddWidgetElementEventMap {
+        "added": WidgetDefinition;
+    }
+    interface HTMLVisAddWidgetElement extends Components.VisAddWidget, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVisAddWidgetElementEventMap>(type: K, listener: (this: HTMLVisAddWidgetElement, ev: VisAddWidgetCustomEvent<HTMLVisAddWidgetElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVisAddWidgetElementEventMap>(type: K, listener: (this: HTMLVisAddWidgetElement, ev: VisAddWidgetCustomEvent<HTMLVisAddWidgetElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVisAddWidgetElement: {
+        prototype: HTMLVisAddWidgetElement;
+        new (): HTMLVisAddWidgetElement;
+    };
     interface HTMLVisMapElement extends Components.VisMap, HTMLStencilElement {
     }
     var HTMLVisMapElement: {
@@ -117,6 +141,7 @@ declare global {
         new (): HTMLVisWidgetsElement;
     };
     interface HTMLElementTagNameMap {
+        "vis-add-widget": HTMLVisAddWidgetElement;
         "vis-map": HTMLVisMapElement;
         "vis-map-selection": HTMLVisMapSelectionElement;
         "vis-placement": HTMLVisPlacementElement;
@@ -126,6 +151,10 @@ declare global {
     }
 }
 declare namespace LocalJSX {
+    interface VisAddWidget {
+        "onAdded"?: (event: VisAddWidgetCustomEvent<WidgetDefinition>) => void;
+        "position": WidgetPosition;
+    }
     interface VisMap {
         "baseMap": BaseMap;
     }
@@ -151,6 +180,7 @@ declare namespace LocalJSX {
         "widgetLayout": WidgetLayout;
     }
     interface IntrinsicElements {
+        "vis-add-widget": VisAddWidget;
         "vis-map": VisMap;
         "vis-map-selection": VisMapSelection;
         "vis-placement": VisPlacement;
@@ -163,6 +193,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "vis-add-widget": LocalJSX.VisAddWidget & JSXBase.HTMLAttributes<HTMLVisAddWidgetElement>;
             "vis-map": LocalJSX.VisMap & JSXBase.HTMLAttributes<HTMLVisMapElement>;
             "vis-map-selection": LocalJSX.VisMapSelection & JSXBase.HTMLAttributes<HTMLVisMapSelectionElement>;
             "vis-placement": LocalJSX.VisPlacement & JSXBase.HTMLAttributes<HTMLVisPlacementElement>;

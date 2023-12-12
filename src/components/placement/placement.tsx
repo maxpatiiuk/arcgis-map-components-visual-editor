@@ -25,7 +25,7 @@ export class ArcgisPlacement {
   }
 
   componentDidLoad(): void {
-    this.mapView.ui.add(this.slotted, this.position as 'top-left');
+    this.mapView.ui.add(this.slotted, this.position);
   }
 
   disconnectedCallback(): void {

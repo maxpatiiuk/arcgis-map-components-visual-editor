@@ -73,6 +73,9 @@ export class VisMap {
             isPreview={this.isPreview}
             mapView={this.mapView}
             widgetLayout={this.widgetLayout}
+            onLayoutChange={({ detail }): void => {
+              this.widgetLayout = detail;
+            }}
           />
         </arcgis-map>
       </calcite-shell>

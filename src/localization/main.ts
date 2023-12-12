@@ -13,4 +13,5 @@ export const mainText = dictionary({
   defaultBaseMaps: { en: 'Default Basemaps' },
   showCode: { en: 'Show Code' },
   preview: { en: 'Preview' },
+  addWidget: { en: 'Add widget' },
 });
