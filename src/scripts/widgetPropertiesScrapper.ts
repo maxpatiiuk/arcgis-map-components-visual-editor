@@ -92,39 +92,39 @@ const distanceMeasurementUnitArgType = {
 // These are used in the eval below
 areaMeasurementUnitArgType || distanceMeasurementUnitArgType;
 
-const widgetDefinitions = files
-  .map((file) =>
-    eval(
-      `(${
-        fs
-          .readFileSync(file)
-          .toString()
-          .match(/(?<== ){[\s\S]+?}(?=;)/g)
-          ?.at(-1) ?? ''
-      })`
+const widgetDefinitions = Object.fromEntries(
+  files
+    .map((file) =>
+      eval(
+        `(${
+          fs
+            .readFileSync(file)
+            .toString()
+            .match(/(?<== ){[\s\S]+?}(?=;)/g)
+            ?.at(-1) ?? ''
+        })`
+      )
     )
-  )
-  .map((meta) => ({
-    name: meta.args.componentName,
-    parameters: Object.entries(meta.argTypes ?? {})
-      .map(([name, parameters]) => {
-        const options = parameters as ParameterOptions;
-        const defaultValue = meta.args[name];
-        const isReadOnly = options.table?.disable === true;
-        const type = options.control?.type;
-        if (isReadOnly || type === 'object') return undefined;
+    .map((meta) => [
+      meta.args.componentName,
+      Object.entries(meta.argTypes ?? {})
+        .map(([name, parameters]) => {
+          const options = parameters as ParameterOptions;
+          const defaultValue = meta.args[name];
+          const isReadOnly = options.table?.disable === true;
+          const type = options.control?.type;
+          if (isReadOnly || type === 'object') return undefined;
 
-        return [
-          {
+          return {
             name,
             type,
             options: options.options ?? options.mapping,
             defaultValue,
-          },
-        ];
-      })
-      .filter(isDefined),
-  }));
+          };
+        })
+        .filter(isDefined),
+    ])
+);
 
 fs.writeFileSync(
   '../assets/widgetProperties.json',
@@ -149,19 +149,13 @@ type ParameterOptions = {
   };
 };
 
-export type WidgetsProperties = RA<{
-  readonly name: string;
-  readonly parameters: IR<WidgetProperties>;
-}>;
+export type WidgetsProperties = IR<RA<WidgetProperty>>;
 
-export type WidgetProperties = {
+export type WidgetProperty = {
   readonly name: string;
-  readonly parameters: RA<{
-    readonly name: string;
-    readonly type: WidgetControlType;
-    readonly options: RA<string>;
-    readonly defaultValue?: string | number | boolean;
-  }>;
+  readonly type: WidgetControlType;
+  readonly options?: RA<string>;
+  readonly defaultValue?: string | number | boolean;
 };
 
 export type WidgetControlType =
@@ -170,5 +164,4 @@ export type WidgetControlType =
   | 'text'
   | 'boolean'
   | 'number'
-  | 'inline-check'
-  | 'object';
+  | 'inline-check';
