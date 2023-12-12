@@ -9,10 +9,10 @@ export type WidgetDefinition = {
 };
 
 export const widgetPositions = [
-  'bottom-left',
-  'bottom-right',
   'top-left',
   'top-right',
+  'bottom-left',
+  'bottom-right',
 ] as const;
 export type WidgetPosition =
   | 'bottom-left'

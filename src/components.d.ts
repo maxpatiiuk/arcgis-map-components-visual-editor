@@ -21,6 +21,7 @@ export namespace Components {
         "basemap": string | undefined;
         "isPreview": boolean;
         "itemId": string | undefined;
+        "map": HTMLArcgisMapElement | undefined;
         "mapView": ArcGISMapView | undefined;
         "widgetLayout": WidgetLayout;
     }
@@ -209,6 +210,7 @@ declare namespace LocalJSX {
         "basemap"?: string | undefined;
         "isPreview"?: boolean;
         "itemId"?: string | undefined;
+        "map"?: HTMLArcgisMapElement | undefined;
         "mapView"?: ArcGISMapView | undefined;
         "onLayoutChange"?: (event: VisMapCustomEvent<WidgetLayout>) => void;
         "widgetLayout": WidgetLayout;

@@ -13,6 +13,12 @@ export const config: Config = {
       // comment the following line to disable service workers in production
       serviceWorker: null,
       baseUrl: 'http://localhost/',
+      copy: [
+        {
+          src: 'index.html',
+          dest: 'build/assets/index.html',
+        },
+      ],
     },
   ],
   plugins: [

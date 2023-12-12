@@ -11,7 +11,7 @@ export const mainText = dictionary({
   continue: { en: 'Continue' },
   portalItemId: { en: 'Portal Item ID' },
   defaultBaseMaps: { en: 'Default Basemaps' },
-  showCode: { en: 'Show Code' },
+  downloadCode: { en: 'Download Code' },
   preview: { en: 'Preview' },
   addWidget: { en: 'Add widget' },
   changeBaseMap: { en: 'Change base map' },

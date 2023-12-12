@@ -2,6 +2,8 @@ import { Component, State, h } from '@stencil/core';
 import { mainText } from '../../localization/main';
 import { defaultBaseMap } from '../map-selection/types';
 import { WidgetLayout } from '../widgets/types';
+import { buildCode } from '../code-builder/buildCode';
+import { downloadFile } from '../code-builder/downloadFile';
 
 @Component({
   tag: 'vis-root',
@@ -11,9 +13,6 @@ export class VisRoot {
   @State() baseMap = defaultBaseMap;
 
   @State() openBaseMapSelection = false;
-
-  // TODO: copy current zoom
-  @State() showCode = false;
 
   @State() isPreview = false;
 
@@ -63,13 +62,14 @@ export class VisRoot {
           <calcite-button
             slot="content-end"
             class="p-4 flex gap-2"
-            appearance={this.showCode ? 'outline-fill' : 'solid'}
-            aria-pressed={this.showCode}
-            onClick={(): void => {
-              this.showCode = !this.showCode;
-            }}
+            appearance="solid"
+            onClick={(): void =>
+              void buildCode(this.baseMap, this.widgetLayout, this.visMap)
+                .then((code) => downloadFile('index.html', code))
+                .catch(console.error)
+            }
           >
-            {mainText.showCode}
+            {mainText.downloadCode}
           </calcite-button>
         </calcite-navigation>
         <vis-map
@@ -84,7 +84,7 @@ export class VisRoot {
           widgetLayout={this.widgetLayout}
           class="h-full"
           ref={(visMap) => {
-            this.visMap = visMap;
+            this.visMap = visMap ?? this.visMap;
           }}
           onLayoutChange={({ detail }): void => {
             this.widgetLayout = detail;

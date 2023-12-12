@@ -2,6 +2,7 @@ import { Component, Prop, Event, h, EventEmitter, State } from '@stencil/core';
 import { WidgetLayout, widgetPositions } from './types';
 import { removeItem, replaceItem } from '../../utils/utils';
 import { ArcGISMapView } from '@arcgis/map-components';
+import { R } from '../../utils/types';
 
 @Component({
   tag: 'vis-widgets',
@@ -18,12 +19,22 @@ export class VisWidgets {
 
   @Event() layoutChange!: EventEmitter<WidgetLayout>;
 
+  // FIXME: all widgets getting duplicated after hot reload
   render() {
+    const grouppedCounts = this.widgetLayout.reduce<R<WidgetLayout>>(
+      (group, widget) => {
+        group[widget.name] = [...(group[widget.name] ?? []), widget];
+        return group;
+      },
+      {}
+    );
     return (
       <div class="contents">
         {this.widgetLayout.map((widget, index) => (
           <vis-widget
-            key={index}
+            key={`${widget.name}_${grouppedCounts[widget.name].indexOf(
+              widget
+            )}`}
             definition={widget}
             mapView={this.mapView}
             isEditing={this.activeWidget === index}

@@ -98,6 +98,7 @@ export class VisWidget {
                       'click',
                       (event) => {
                         if (this.isPreview) return;
+                        // FIXME: if isEditing, this looses props
                         if (this.isEditing)
                           this.finishEditing.emit(this.pendingDefinition);
                         else {
@@ -130,7 +131,7 @@ export class VisWidget {
               <div class="flex flex-col p-4 gap-4">
                 {definitions[this.definition.name].map((property) => (
                   <vis-widget-property
-                    definition={this.definition}
+                    definition={this.pendingDefinition}
                     key={property.name}
                     propertyDefinition={property}
                     onDefinitionChange={({ detail }): void => {
