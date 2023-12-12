@@ -1,6 +1,7 @@
 {
   "include": ["src"],
-  "exclude": ["node_modules"],
+  "excludefiles": ["node_modules"],
+  "files": ["node_modules/@esri/calcite-components/dist/types/components.d.ts"],
   "compilerOptions": {
     /* Basic Options */
     "jsx": "react",
