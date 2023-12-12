@@ -1,61 +1,40 @@
 # ArcGIS Maps SDK for JavaScript - Visual Builder for components
 
-A small demo app implementing a visual builder for the ArcGIS Maps SDK for
-JavaScript components
+Create small GIS apps using ArcGIS mapping components in seconds, without
+touching an code.
 
-> Note: if you are seeing this error when building the app:
->
-> > An index signature parameter type must be either `string` or `number` in
-> > `./node_modules/@types/babel__traverse/index.d.ts`
->
-> [The workaround requires manually editing the type in node_modules](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/65766#issuecomment-1596187449)
+Inspired by ArcGIS Instant Apps builder. This app was created as part of a 2-day
+hackathon focused on testing mapping components.
+[More about components](https://developers.arcgis.com/javascript/latest/components/)
 
-Stencil is a compiler for building fast web apps using Web Components.
+## Video Demo
 
-Stencil combines the best concepts of the most popular frontend frameworks into
-a compile-time rather than run-time tool. Stencil takes TypeScript, JSX, a tiny
-virtual DOM layer, efficient one-way data binding, an asynchronous rendering
-pipeline (similar to React Fiber), and lazy-loading out of the box, and
-generates 100% standards-based Web Components that run in any browser supporting
-the Custom Elements v1 spec.
+[Video Demo](https://youtu.be/seIRVPHwIhs)
 
-Stencil components are just Web Components, so they work in any major framework
-or with no framework at all. In many cases, Stencil can be used as a drop in
-replacement for traditional frontend frameworks given the capabilities now
-available in the browser, though using it as such is certainly not required.
+## Development
 
-Stencil also enables a number of key capabilities on top of Web Components, in
-particular Server Side Rendering (SSR) without the need to run a headless
-browser, pre-rendering, and objects-as-properties (instead of just strings).
+1. Clone this repository and open it in terminal
+2. Install dependencies:
 
-## Getting Started
+   ```sh
+   npm install
+   ```
 
-To start a new project using Stencil, clone this repo to a new directory:
+   > Note: if you are seeing the following error when building the app:
+   >
+   > > An index signature parameter type must be either `string` or `number` in
+   > > `./node_modules/@types/babel__traverse/index.d.ts`
+   >
+   > [The workaround requires manually editing the type in node_modules](https://github.com/DefinitelyTyped/DefinitelyTyped/issues/65766#issuecomment-1596187449)
 
-```bash
-npm init stencil app
-```
+3. Start the app in development:
 
-and run:
+   ```sh
+   npm start
+   ```
 
-```bash
-npm start
-```
+   or do a production build:
 
-To build the app for production, run:
-
-```bash
-npm run build
-```
-
-To run the unit tests once, run:
-
-```
-npm test
-```
-
-To run the unit tests and watch for file changes during development, run:
-
-```
-npm run test.watch
-```
+   ```sh
+   npm run build
+   ```

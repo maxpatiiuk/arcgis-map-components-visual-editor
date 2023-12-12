@@ -5,7 +5,7 @@ export const mainText = dictionary({
     en: 'ArcGIS Maps SDK for JavaScript - Visual Builder for components',
   },
   subDescription: {
-    en: 'To start, enter a Portal Item ID or select a basemap:',
+    en: 'Enter a Portal Item ID or select a basemap:',
   },
   browseAllPortalItems: { en: 'Browse all portal items' },
   continue: { en: 'Continue' },
