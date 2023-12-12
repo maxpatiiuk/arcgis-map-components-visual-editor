@@ -9,6 +9,9 @@ import {
 } from '@stencil/core';
 import { WidgetDefinition } from '../widgets/types';
 import { R } from '../../utils/types';
+import { ArcGISMapView } from '@arcgis/map-components';
+import { widgetNameToHuman } from '../add-widget/widgetProperties';
+import { mainText } from '../../localization/main';
 
 @Component({
   tag: 'vis-widget',
@@ -19,8 +22,10 @@ export class VisWidget {
 
   @Prop() isEditing: boolean = false;
 
+  @Prop() mapView!: ArcGISMapView;
+
   @Event() startEditing!: EventEmitter<void>;
-  @Event() finishEditing!: EventEmitter<WidgetDefinition | undefined>;
+  @Event() finishEditing!: EventEmitter<WidgetDefinition | null>;
 
   @State() containerRef: HTMLDivElement | undefined;
 
@@ -55,26 +60,64 @@ export class VisWidget {
 
   render() {
     return (
-      <div
-        onClickCapture={(event): void => {
-          event.preventDefault();
-          this.startEditing.emit();
-        }}
-        ref={(containerRef): void => {
-          if (containerRef === undefined) return;
-          this.widgetRef = document.createElement(
-            this.definition.name
-          ) as HTMLArcgisHomeElement;
-          this.widgetRef.position = this.definition.position;
-          this.widgetRef.classList.add('pointer-events-none');
-          this.definitionWatcher(this.definition, {
-            ...this.definition,
-            properties: {},
-          });
+      <div>
+        <div
+          ref={(containerRef): void => {
+            if (containerRef === undefined || this.widgetRef !== undefined)
+              return;
+            this.widgetRef = document.createElement(
+              this.definition.name
+            ) as HTMLArcgisHomeElement;
+            this.widgetRef.position = this.definition.position;
+            this.widgetRef.view = this.mapView;
+            this.widgetRef.classList.add('pointer-events-none');
 
-          containerRef.append(this.widgetRef);
-        }}
-      />
+            this.definitionWatcher(this.definition, {
+              ...this.definition,
+              properties: {},
+            });
+
+            containerRef.append(this.widgetRef);
+
+            this.widgetRef.addEventListener(
+              'widgetReady',
+              ({ detail: { widget } }) =>
+                typeof widget.container === 'object'
+                  ? widget.container.addEventListener(
+                      'click',
+                      (event) => {
+                        event.preventDefault();
+                        event.stopPropagation();
+                        this.startEditing.emit();
+                      },
+                      { capture: true }
+                    )
+                  : undefined
+            );
+          }}
+        />
+        {this.isEditing &&
+        typeof this.widgetRef?.widget.container === 'object' ? (
+          <calcite-popover
+            referenceElement={this.widgetRef.widget.container}
+            label={widgetNameToHuman(this.definition.name)}
+            heading={widgetNameToHuman(this.definition.name)}
+            open
+            autoClose
+            closable
+            onCalcitePopoverClose={(): void =>
+              void this.finishEditing.emit(this.definition)
+            }
+          >
+            <calcite-button
+              onClick={(): void => void this.finishEditing.emit(undefined)}
+              kind="danger"
+            >
+              {mainText.remove}
+            </calcite-button>
+          </calcite-popover>
+        ) : undefined}
+      </div>
     );
   }
 }

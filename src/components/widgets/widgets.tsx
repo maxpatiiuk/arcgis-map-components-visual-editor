@@ -10,7 +10,7 @@ import { ArcGISMapView } from '@arcgis/map-components';
 export class VisWidgets {
   @Prop() widgetLayout!: WidgetLayout;
 
-  @Prop() mapView: ArcGISMapView | undefined = undefined;
+  @Prop() mapView!: ArcGISMapView;
 
   @Prop() isPreview: boolean = false;
 
@@ -25,6 +25,7 @@ export class VisWidgets {
           <vis-widget
             key={index}
             definition={widget}
+            mapView={this.mapView}
             isEditing={this.activeWidget === index}
             onStartEditing={(): void => {
               this.activeWidget = index;
@@ -32,24 +33,23 @@ export class VisWidgets {
             onFinishEditing={({ detail: newWidgetLayout }): void => {
               this.activeWidget = undefined;
               this.layoutChange.emit(
-                newWidgetLayout === undefined
+                newWidgetLayout === null
                   ? removeItem(this.widgetLayout, index)
                   : replaceItem(this.widgetLayout, index, newWidgetLayout)
               );
             }}
           />
         ))}
-        {typeof this.mapView === 'object' &&
-          widgetPositions.map((position) => (
-            <vis-placement mapView={this.mapView!} position={position}>
-              <vis-add-widget
-                position={position}
-                onAdded={({ detail }): void =>
-                  void this.layoutChange.emit([...this.widgetLayout, detail])
-                }
-              />
-            </vis-placement>
-          ))}
+        {widgetPositions.map((position) => (
+          <vis-placement mapView={this.mapView!} position={position}>
+            <vis-add-widget
+              position={position}
+              onAdded={({ detail }): void =>
+                void this.layoutChange.emit([...this.widgetLayout, detail])
+              }
+            />
+          </vis-placement>
+        ))}
       </div>
     );
   }

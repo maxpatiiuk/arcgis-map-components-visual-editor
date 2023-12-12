@@ -15,4 +15,5 @@ export const mainText = dictionary({
   preview: { en: 'Preview' },
   addWidget: { en: 'Add widget' },
   changeBaseMap: { en: 'Change base map' },
+  remove: { en: 'Remove' },
 });

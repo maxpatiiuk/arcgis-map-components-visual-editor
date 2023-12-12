@@ -32,14 +32,16 @@ export class VisMap {
             });
         }}
       >
-        <vis-widgets
-          isPreview={this.isPreview}
-          mapView={this.mapView}
-          widgetLayout={this.widgetLayout}
-          onLayoutChange={({ detail }): void =>
-            void this.layoutChange.emit(detail)
-          }
-        />
+        {typeof this.mapView === 'object' && (
+          <vis-widgets
+            isPreview={this.isPreview}
+            mapView={this.mapView}
+            widgetLayout={this.widgetLayout}
+            onLayoutChange={({ detail }): void =>
+              void this.layoutChange.emit(detail)
+            }
+          />
+        )}
       </arcgis-map>
     );
   }

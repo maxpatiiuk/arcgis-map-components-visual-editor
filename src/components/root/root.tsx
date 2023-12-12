@@ -17,15 +17,9 @@ export class VisRoot {
 
   @State() isPreview = false;
 
-  @State() widgetLayout: WidgetLayout = [
-    {
-      name: 'Home',
-      position: 'top-left',
-      properties: {},
-    },
-  ];
+  @State() widgetLayout: WidgetLayout = [];
 
-  @State() visMap: HTMLVisMapElement | undefined;
+  visMap: HTMLVisMapElement | undefined;
 
   render() {
     const itemId =

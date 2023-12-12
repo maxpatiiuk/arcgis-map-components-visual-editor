@@ -34,10 +34,11 @@ export namespace Components {
     interface VisWidget {
         "definition": WidgetDefinition;
         "isEditing": boolean;
+        "mapView": ArcGISMapView;
     }
     interface VisWidgets {
         "isPreview": boolean;
-        "mapView": ArcGISMapView | undefined;
+        "mapView": ArcGISMapView;
         "widgetLayout": WidgetLayout;
     }
 }
@@ -127,7 +128,7 @@ declare global {
     };
     interface HTMLVisWidgetElementEventMap {
         "startEditing": void;
-        "finishEditing": WidgetDefinition | undefined;
+        "finishEditing": WidgetDefinition | null;
     }
     interface HTMLVisWidgetElement extends Components.VisWidget, HTMLStencilElement {
         addEventListener<K extends keyof HTMLVisWidgetElementEventMap>(type: K, listener: (this: HTMLVisWidgetElement, ev: VisWidgetCustomEvent<HTMLVisWidgetElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
@@ -196,12 +197,13 @@ declare namespace LocalJSX {
     interface VisWidget {
         "definition": WidgetDefinition;
         "isEditing"?: boolean;
-        "onFinishEditing"?: (event: VisWidgetCustomEvent<WidgetDefinition | undefined>) => void;
+        "mapView": ArcGISMapView;
+        "onFinishEditing"?: (event: VisWidgetCustomEvent<WidgetDefinition | null>) => void;
         "onStartEditing"?: (event: VisWidgetCustomEvent<void>) => void;
     }
     interface VisWidgets {
         "isPreview"?: boolean;
-        "mapView"?: ArcGISMapView | undefined;
+        "mapView": ArcGISMapView;
         "onLayoutChange"?: (event: VisWidgetsCustomEvent<WidgetLayout>) => void;
         "widgetLayout": WidgetLayout;
     }
