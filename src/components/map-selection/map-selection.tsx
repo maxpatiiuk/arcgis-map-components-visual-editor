@@ -7,7 +7,6 @@ const portalBrowserUrl =
   'https://www.arcgis.com/home/search.html?restrict=false&sortField=numviews&sortOrder=desc&focus=maps-webmaps';
 
 const defaultState: BaseMap = {
-  // TODO: try out also 41281c51f9de45edaf1c8ed44bb10e30
   type: 'PortalItem',
   portalItemId: '41281c51f9de45edaf1c8ed44bb10e30',
 };

@@ -11,4 +11,6 @@ export const mainText = dictionary({
   continue: { en: 'Continue' },
   portalItemId: { en: 'Portal Item ID' },
   defaultBaseMaps: { en: 'Default Basemaps' },
+  showCode: { en: 'Show Code' },
+  preview: { en: 'Preview' },
 });

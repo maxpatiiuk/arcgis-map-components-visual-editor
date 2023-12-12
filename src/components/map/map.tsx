@@ -1,6 +1,8 @@
-import { Component, Prop, h } from '@stencil/core';
+import { Component, Prop, State, h } from '@stencil/core';
 import { mainText } from '../../localization/main';
 import { BaseMap } from '../map-selection/types';
+import { WidgetLayout } from '../widgets/types';
+import { ArcGISMapView } from '@arcgis/map-components';
 
 @Component({
   tag: 'vis-map',
@@ -9,59 +11,46 @@ import { BaseMap } from '../map-selection/types';
 export class VisMap {
   @Prop() baseMap!: BaseMap;
 
+  @State() showCode = false;
+
+  @State() isPreview = false;
+
+  @State() widgetLayout: WidgetLayout = [
+    {
+      name: 'Home',
+      position: 'top-left',
+      properties: {},
+    },
+  ];
+
+  @State() mapView: ArcGISMapView | undefined = undefined;
+
   render() {
     return (
       <calcite-shell>
         <calcite-navigation slot="header">
-          <calcite-navigation-logo
-            slot="logo"
-            heading={mainText.title}
-            description={mainText.title}
-          ></calcite-navigation-logo>
-          <calcite-menu slot="content-end" label="">
-            <calcite-menu-item
-              text="Drivers"
-              label="Drivers"
-              icon-start="license"
-              text-enabled
-            ></calcite-menu-item>
-            <calcite-menu-item
-              active
-              text="Routes"
-              label="Drivers"
-              icon-start="road-sign"
-              text-enabled
-            ></calcite-menu-item>
-            <calcite-menu-item
-              text="Forecast"
-              label="Drivers"
-              icon-start="snow"
-              text-enabled
-            ></calcite-menu-item>
-          </calcite-menu>
-          <calcite-navigation slot="navigation-secondary">
-            <calcite-menu slot="content-start" label="abc">
-              <calcite-menu-item
-                breadcrumb
-                text="All Routes"
-                label="Drivers"
-                icon-start="book"
-                text-enabled
-              ></calcite-menu-item>
-              <calcite-menu-item
-                active
-                label="Drivers"
-                text="South Hills"
-                icon-start="apps"
-                text-enabled
-              ></calcite-menu-item>
-            </calcite-menu>
-          </calcite-navigation>
-          <calcite-navigation-user
-            slot="user"
-            full-name="Wendell Berry"
-            username="w_berry"
-          ></calcite-navigation-user>
+          <calcite-button
+            slot="content-start"
+            class="p-4 flex gap-2"
+            appearance={this.isPreview ? 'outline-fill' : 'solid'}
+            aria-pressed={this.isPreview}
+            onClick={(): void => {
+              this.isPreview = !this.isPreview;
+            }}
+          >
+            {mainText.preview}
+          </calcite-button>
+          <calcite-button
+            slot="content-end"
+            class="p-4 flex gap-2"
+            appearance={this.showCode ? 'outline-fill' : 'solid'}
+            aria-pressed={this.showCode}
+            onClick={(): void => {
+              this.showCode = !this.showCode;
+            }}
+          >
+            {mainText.showCode}
+          </calcite-button>
         </calcite-navigation>
         <arcgis-map
           itemId={
@@ -73,8 +62,18 @@ export class VisMap {
             this.baseMap.type === 'Basemap' ? this.baseMap.basemap : undefined
           }
           className="h-full"
+          ref={(map: HTMLArcgisMapElement): void =>
+            map?.addEventListener('viewReady', () => {
+              // FIXME: remove the default zoom widget?
+              this.mapView = map.view;
+            })
+          }
         >
-          <arcgis-layer-list position="top-right" />
+          <vis-widgets
+            isPreview={this.isPreview}
+            mapView={this.mapView}
+            widgetLayout={this.widgetLayout}
+          />
         </arcgis-map>
       </calcite-shell>
     );
