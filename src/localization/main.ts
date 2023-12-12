@@ -14,4 +14,5 @@ export const mainText = dictionary({
   showCode: { en: 'Show Code' },
   preview: { en: 'Preview' },
   addWidget: { en: 'Add widget' },
+  changeBaseMap: { en: 'Change base map' },
 });

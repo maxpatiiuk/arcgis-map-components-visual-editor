@@ -1,6 +1,4 @@
-import { Component, Prop, State, h } from '@stencil/core';
-import { mainText } from '../../localization/main';
-import { BaseMap } from '../map-selection/types';
+import { Component, Prop, Event, h, EventEmitter } from '@stencil/core';
 import { WidgetLayout } from '../widgets/types';
 import { ArcGISMapView } from '@arcgis/map-components';
 
@@ -9,76 +7,40 @@ import { ArcGISMapView } from '@arcgis/map-components';
   shadow: false,
 })
 export class VisMap {
-  @Prop() baseMap!: BaseMap;
+  @Prop() itemId: string | undefined;
 
-  @State() showCode = false;
+  @Prop() basemap: string | undefined;
 
-  @State() isPreview = false;
+  @Prop() isPreview = false;
 
-  @State() widgetLayout: WidgetLayout = [
-    {
-      name: 'Home',
-      position: 'top-left',
-      properties: {},
-    },
-  ];
+  @Prop() widgetLayout!: WidgetLayout;
 
-  @State() mapView: ArcGISMapView | undefined = undefined;
+  @Prop({ mutable: true }) mapView: ArcGISMapView | undefined = undefined;
+
+  @Event() layoutChange!: EventEmitter<WidgetLayout>;
 
   render() {
     return (
-      <calcite-shell>
-        <calcite-navigation slot="header">
-          <calcite-button
-            slot="content-start"
-            class="p-4 flex gap-2"
-            appearance={this.isPreview ? 'outline-fill' : 'solid'}
-            aria-pressed={this.isPreview}
-            onClick={(): void => {
-              this.isPreview = !this.isPreview;
-            }}
-          >
-            {mainText.preview}
-          </calcite-button>
-          <calcite-button
-            slot="content-end"
-            class="p-4 flex gap-2"
-            appearance={this.showCode ? 'outline-fill' : 'solid'}
-            aria-pressed={this.showCode}
-            onClick={(): void => {
-              this.showCode = !this.showCode;
-            }}
-          >
-            {mainText.showCode}
-          </calcite-button>
-        </calcite-navigation>
-        <arcgis-map
-          itemId={
-            this.baseMap.type === 'PortalItem'
-              ? this.baseMap.portalItemId
-              : undefined
-          }
-          basemap={
-            this.baseMap.type === 'Basemap' ? this.baseMap.basemap : undefined
-          }
-          className="h-full"
-          ref={(map: HTMLArcgisMapElement): void =>
+      <arcgis-map
+        itemId={this.itemId}
+        basemap={this.basemap}
+        ref={(map: HTMLArcgisMapElement): void => {
+          if (map?.view?.ready === true) this.mapView = map.view;
+          else
             map?.addEventListener('viewReady', () => {
-              // FIXME: remove the default zoom widget?
               this.mapView = map.view;
-            })
+            });
+        }}
+      >
+        <vis-widgets
+          isPreview={this.isPreview}
+          mapView={this.mapView}
+          widgetLayout={this.widgetLayout}
+          onLayoutChange={({ detail }): void =>
+            void this.layoutChange.emit(detail)
           }
-        >
-          <vis-widgets
-            isPreview={this.isPreview}
-            mapView={this.mapView}
-            widgetLayout={this.widgetLayout}
-            onLayoutChange={({ detail }): void => {
-              this.widgetLayout = detail;
-            }}
-          />
-        </arcgis-map>
-      </calcite-shell>
+        />
+      </arcgis-map>
     );
   }
 }

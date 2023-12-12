@@ -1,22 +1,17 @@
-import { Component, EventEmitter, Event, State, h } from '@stencil/core';
+import { Component, EventEmitter, Event, h, Prop } from '@stencil/core';
 import { mainText } from '../../localization/main';
 import { basemaps } from '../map/basemaps';
-import { BaseMap } from './types';
+import { BaseMap, defaultBaseMap } from './types';
 
 const portalBrowserUrl =
   'https://www.arcgis.com/home/search.html?restrict=false&sortField=numviews&sortOrder=desc&focus=maps-webmaps';
-
-const defaultState: BaseMap = {
-  type: 'PortalItem',
-  portalItemId: '41281c51f9de45edaf1c8ed44bb10e30',
-};
 
 @Component({
   tag: 'vis-map-selection',
   shadow: false,
 })
 export class VisMapSelection {
-  @State() baseMap: BaseMap = defaultState;
+  @Prop() baseMap!: BaseMap;
 
   @Event() baseMapSelected!: EventEmitter<BaseMap>;
 
@@ -45,7 +40,7 @@ export class VisMapSelection {
                 value="portal-item-id"
                 selected={this.baseMap.type === 'PortalItem'}
                 onCalciteListItemSelect={(): void => {
-                  this.baseMap = defaultState;
+                  this.baseMap = defaultBaseMap;
                 }}
               >
                 {this.baseMap.type === 'PortalItem' && (

@@ -6,19 +6,24 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { WidgetDefinition, WidgetLayout, WidgetPosition } from "./components/widgets/types";
-import { BaseMap } from "./components/map-selection/types";
 import { ArcGISMapView } from "@arcgis/map-components";
+import { BaseMap } from "./components/map-selection/types";
 export { WidgetDefinition, WidgetLayout, WidgetPosition } from "./components/widgets/types";
-export { BaseMap } from "./components/map-selection/types";
 export { ArcGISMapView } from "@arcgis/map-components";
+export { BaseMap } from "./components/map-selection/types";
 export namespace Components {
     interface VisAddWidget {
         "position": WidgetPosition;
     }
     interface VisMap {
-        "baseMap": BaseMap;
+        "basemap": string | undefined;
+        "isPreview": boolean;
+        "itemId": string | undefined;
+        "mapView": ArcGISMapView | undefined;
+        "widgetLayout": WidgetLayout;
     }
     interface VisMapSelection {
+        "baseMap": BaseMap;
     }
     interface VisPlacement {
         "mapView": ArcGISMapView;
@@ -39,6 +44,10 @@ export namespace Components {
 export interface VisAddWidgetCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVisAddWidgetElement;
+}
+export interface VisMapCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVisMapElement;
 }
 export interface VisMapSelectionCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -70,7 +79,18 @@ declare global {
         prototype: HTMLVisAddWidgetElement;
         new (): HTMLVisAddWidgetElement;
     };
+    interface HTMLVisMapElementEventMap {
+        "layoutChange": WidgetLayout;
+    }
     interface HTMLVisMapElement extends Components.VisMap, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVisMapElementEventMap>(type: K, listener: (this: HTMLVisMapElement, ev: VisMapCustomEvent<HTMLVisMapElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVisMapElementEventMap>(type: K, listener: (this: HTMLVisMapElement, ev: VisMapCustomEvent<HTMLVisMapElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
     }
     var HTMLVisMapElement: {
         prototype: HTMLVisMapElement;
@@ -156,9 +176,15 @@ declare namespace LocalJSX {
         "position": WidgetPosition;
     }
     interface VisMap {
-        "baseMap": BaseMap;
+        "basemap"?: string | undefined;
+        "isPreview"?: boolean;
+        "itemId"?: string | undefined;
+        "mapView"?: ArcGISMapView | undefined;
+        "onLayoutChange"?: (event: VisMapCustomEvent<WidgetLayout>) => void;
+        "widgetLayout": WidgetLayout;
     }
     interface VisMapSelection {
+        "baseMap": BaseMap;
         "onBaseMapSelected"?: (event: VisMapSelectionCustomEvent<BaseMap>) => void;
     }
     interface VisPlacement {

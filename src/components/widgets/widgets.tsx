@@ -41,11 +41,7 @@ export class VisWidgets {
         ))}
         {typeof this.mapView === 'object' &&
           widgetPositions.map((position) => (
-            <vis-placement
-              mapView={this.mapView!}
-              key={position}
-              position={position}
-            >
+            <vis-placement mapView={this.mapView!} position={position}>
               <vis-add-widget
                 position={position}
                 onAdded={({ detail }): void =>
