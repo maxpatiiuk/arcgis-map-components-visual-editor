@@ -5,7 +5,7 @@ export type WidgetLayout = RA<WidgetDefinition>;
 export type WidgetDefinition = {
   readonly name: string;
   readonly position: WidgetPosition;
-  readonly properties: IR<string | number | boolean>;
+  readonly properties: IR<string | number | boolean | RA<string>>;
 };
 
 export const widgetPositions = [

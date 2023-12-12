@@ -12,22 +12,31 @@ import { R } from '../../utils/types';
 import { ArcGISMapView } from '@arcgis/map-components';
 import { widgetNameToHuman } from '../add-widget/widgetProperties';
 import { mainText } from '../../localization/main';
+import widgetProperties from '../../assets/widgetProperties.json';
+import { WidgetsProperties } from '../../scripts/widgetPropertiesScrapper';
+
+const definitions = widgetProperties as WidgetsProperties;
 
 @Component({
   tag: 'vis-widget',
   shadow: false,
 })
 export class VisWidget {
-  @Prop() definition!: WidgetDefinition;
+  @Prop() isEditing = false;
 
-  @Prop() isEditing: boolean = false;
+  @Prop() isPreview = false;
 
   @Prop() mapView!: ArcGISMapView;
 
-  @Event() startEditing!: EventEmitter<void>;
-  @Event() finishEditing!: EventEmitter<WidgetDefinition | null>;
+  @Prop() definition!: WidgetDefinition;
+
+  @State() pendingDefinition!: WidgetDefinition;
 
   @State() containerRef: HTMLDivElement | undefined;
+
+  @Event() startEditing!: EventEmitter<void>;
+
+  @Event() finishEditing!: EventEmitter<WidgetDefinition | null>;
 
   widgetRef: HTMLArcgisHomeElement | undefined;
 
@@ -40,9 +49,11 @@ export class VisWidget {
 
     if (widget === undefined) return;
 
+    this.pendingDefinition = definition;
+
     // Remove old properties
     const newKeys = new Set(Object.keys(definition.properties));
-    const removedProperties = Object.keys(oldDefinition).filter(
+    const removedProperties = Object.keys(oldDefinition.properties).filter(
       (key) => !newKeys.has(key)
     );
     removedProperties.forEach((property) => {
@@ -86,9 +97,14 @@ export class VisWidget {
                   ? widget.container.addEventListener(
                       'click',
                       (event) => {
-                        event.preventDefault();
-                        event.stopPropagation();
-                        this.startEditing.emit();
+                        if (this.isPreview) return;
+                        if (this.isEditing)
+                          this.finishEditing.emit(this.pendingDefinition);
+                        else {
+                          event.preventDefault();
+                          event.stopPropagation();
+                          this.startEditing.emit();
+                        }
                       },
                       { capture: true }
                     )
@@ -97,6 +113,7 @@ export class VisWidget {
           }}
         />
         {this.isEditing &&
+        !this.isPreview &&
         typeof this.widgetRef?.widget.container === 'object' ? (
           <calcite-popover
             referenceElement={this.widgetRef.widget.container}
@@ -106,9 +123,23 @@ export class VisWidget {
             autoClose
             closable
             onCalcitePopoverClose={(): void =>
-              void this.finishEditing.emit(this.definition)
+              void this.finishEditing.emit(this.pendingDefinition)
             }
           >
+            {definitions[this.definition.name].length > 0 && (
+              <div class="flex flex-col p-4 gap-4">
+                {definitions[this.definition.name].map((property) => (
+                  <vis-widget-property
+                    definition={this.definition}
+                    key={property.name}
+                    propertyDefinition={property}
+                    onDefinitionChange={({ detail }): void => {
+                      this.pendingDefinition = detail;
+                    }}
+                  />
+                ))}
+              </div>
+            )}
             <calcite-button
               onClick={(): void => void this.finishEditing.emit(undefined)}
               kind="danger"

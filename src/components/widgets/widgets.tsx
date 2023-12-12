@@ -27,6 +27,7 @@ export class VisWidgets {
             definition={widget}
             mapView={this.mapView}
             isEditing={this.activeWidget === index}
+            isPreview={this.isPreview}
             onStartEditing={(): void => {
               this.activeWidget = index;
             }}
@@ -40,16 +41,17 @@ export class VisWidgets {
             }}
           />
         ))}
-        {widgetPositions.map((position) => (
-          <vis-placement mapView={this.mapView!} position={position}>
-            <vis-add-widget
-              position={position}
-              onAdded={({ detail }): void =>
-                void this.layoutChange.emit([...this.widgetLayout, detail])
-              }
-            />
-          </vis-placement>
-        ))}
+        {!this.isPreview &&
+          widgetPositions.map((position) => (
+            <vis-placement mapView={this.mapView!} position={position}>
+              <vis-add-widget
+                position={position}
+                onAdded={({ detail }): void =>
+                  void this.layoutChange.emit([...this.widgetLayout, detail])
+                }
+              />
+            </vis-placement>
+          ))}
       </div>
     );
   }

@@ -4,9 +4,9 @@ import { mainText } from '../../localization/main';
 import { widgetNameToHuman } from './widgetProperties';
 import widgetProperties from '../../assets/widgetProperties.json';
 
-const widgetNames = widgetProperties.map(
-  ({ name }) => [name, widgetNameToHuman(name)] as const
-);
+const widgetNames = Object.keys(widgetProperties)
+  .filter((name) => name !== 'arcgis-map' && name !== 'arcgis-scene')
+  .map((name) => [name, widgetNameToHuman(name)] as const);
 
 @Component({
   tag: 'vis-add-widget',

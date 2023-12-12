@@ -1,4 +1,4 @@
-import { RA } from './types';
+import { IR, RA } from './types';
 
 // Find a value in an array, and return it's mapped variant
 export function mappedFind<ITEM, RETURN_TYPE>(
@@ -32,6 +32,21 @@ export const removeItem = <T>(array: RA<T>, index: number): RA<T> =>
   index < 0
     ? [...array.slice(0, index - 1), ...array.slice(index)]
     : [...array.slice(0, index), ...array.slice(index + 1)];
+
+/**
+ * Create a new object with given keys removed
+ */
+export const removeKey = <
+  DICTIONARY extends IR<unknown>,
+  OMIT extends keyof DICTIONARY
+>(
+  object: DICTIONARY,
+  ...toOmit: RA<OMIT>
+): Omit<DICTIONARY, OMIT> =>
+  // @ts-expect-error
+  Object.fromEntries(
+    Object.entries(object).filter(([key]) => !toOmit.includes(key as OMIT))
+  );
 
 export function error(message: string): never {
   throw new Error(message);

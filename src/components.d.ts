@@ -8,9 +8,11 @@ import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { WidgetDefinition, WidgetLayout, WidgetPosition } from "./components/widgets/types";
 import { ArcGISMapView } from "@arcgis/map-components";
 import { BaseMap } from "./components/map-selection/types";
+import { WidgetProperty } from "./scripts/widgetPropertiesScrapper";
 export { WidgetDefinition, WidgetLayout, WidgetPosition } from "./components/widgets/types";
 export { ArcGISMapView } from "@arcgis/map-components";
 export { BaseMap } from "./components/map-selection/types";
+export { WidgetProperty } from "./scripts/widgetPropertiesScrapper";
 export namespace Components {
     interface VisAddWidget {
         "position": WidgetPosition;
@@ -34,7 +36,12 @@ export namespace Components {
     interface VisWidget {
         "definition": WidgetDefinition;
         "isEditing": boolean;
+        "isPreview": boolean;
         "mapView": ArcGISMapView;
+    }
+    interface VisWidgetProperty {
+        "definition": WidgetDefinition;
+        "propertyDefinition": WidgetProperty;
     }
     interface VisWidgets {
         "isPreview": boolean;
@@ -57,6 +64,10 @@ export interface VisMapSelectionCustomEvent<T> extends CustomEvent<T> {
 export interface VisWidgetCustomEvent<T> extends CustomEvent<T> {
     detail: T;
     target: HTMLVisWidgetElement;
+}
+export interface VisWidgetPropertyCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVisWidgetPropertyElement;
 }
 export interface VisWidgetsCustomEvent<T> extends CustomEvent<T> {
     detail: T;
@@ -144,6 +155,23 @@ declare global {
         prototype: HTMLVisWidgetElement;
         new (): HTMLVisWidgetElement;
     };
+    interface HTMLVisWidgetPropertyElementEventMap {
+        "definitionChange": WidgetDefinition;
+    }
+    interface HTMLVisWidgetPropertyElement extends Components.VisWidgetProperty, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVisWidgetPropertyElementEventMap>(type: K, listener: (this: HTMLVisWidgetPropertyElement, ev: VisWidgetPropertyCustomEvent<HTMLVisWidgetPropertyElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVisWidgetPropertyElementEventMap>(type: K, listener: (this: HTMLVisWidgetPropertyElement, ev: VisWidgetPropertyCustomEvent<HTMLVisWidgetPropertyElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVisWidgetPropertyElement: {
+        prototype: HTMLVisWidgetPropertyElement;
+        new (): HTMLVisWidgetPropertyElement;
+    };
     interface HTMLVisWidgetsElementEventMap {
         "layoutChange": WidgetLayout;
     }
@@ -168,6 +196,7 @@ declare global {
         "vis-placement": HTMLVisPlacementElement;
         "vis-root": HTMLVisRootElement;
         "vis-widget": HTMLVisWidgetElement;
+        "vis-widget-property": HTMLVisWidgetPropertyElement;
         "vis-widgets": HTMLVisWidgetsElement;
     }
 }
@@ -197,9 +226,15 @@ declare namespace LocalJSX {
     interface VisWidget {
         "definition": WidgetDefinition;
         "isEditing"?: boolean;
+        "isPreview"?: boolean;
         "mapView": ArcGISMapView;
         "onFinishEditing"?: (event: VisWidgetCustomEvent<WidgetDefinition | null>) => void;
         "onStartEditing"?: (event: VisWidgetCustomEvent<void>) => void;
+    }
+    interface VisWidgetProperty {
+        "definition": WidgetDefinition;
+        "onDefinitionChange"?: (event: VisWidgetPropertyCustomEvent<WidgetDefinition>) => void;
+        "propertyDefinition": WidgetProperty;
     }
     interface VisWidgets {
         "isPreview"?: boolean;
@@ -214,6 +249,7 @@ declare namespace LocalJSX {
         "vis-placement": VisPlacement;
         "vis-root": VisRoot;
         "vis-widget": VisWidget;
+        "vis-widget-property": VisWidgetProperty;
         "vis-widgets": VisWidgets;
     }
 }
@@ -227,6 +263,7 @@ declare module "@stencil/core" {
             "vis-placement": LocalJSX.VisPlacement & JSXBase.HTMLAttributes<HTMLVisPlacementElement>;
             "vis-root": LocalJSX.VisRoot & JSXBase.HTMLAttributes<HTMLVisRootElement>;
             "vis-widget": LocalJSX.VisWidget & JSXBase.HTMLAttributes<HTMLVisWidgetElement>;
+            "vis-widget-property": LocalJSX.VisWidgetProperty & JSXBase.HTMLAttributes<HTMLVisWidgetPropertyElement>;
             "vis-widgets": LocalJSX.VisWidgets & JSXBase.HTMLAttributes<HTMLVisWidgetsElement>;
         }
     }
