@@ -1,0 +1,751 @@
+[
+  {
+    "name": "arcgis-area-measurement-2d",
+    "parameters": [
+      [
+        {
+          "name": "unit",
+          "type": "select",
+          "options": [
+            "acres",
+            "ares",
+            "hectares",
+            "imperial",
+            "metric",
+            "square-centimeters",
+            "square-decimeters",
+            "square-feet",
+            "square-inches",
+            "square-kilometers",
+            "square-meters",
+            "square-miles",
+            "square-millimeters",
+            "square-us-feet",
+            "square-yards"
+          ]
+        }
+      ],
+      [
+        {
+          "name": "unitOptions",
+          "type": "radio",
+          "options": [
+            "imperial",
+            "metric"
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-area-measurement-3d",
+    "parameters": [
+      [
+        {
+          "name": "unit",
+          "type": "select",
+          "options": [
+            "acres",
+            "ares",
+            "hectares",
+            "imperial",
+            "metric",
+            "square-centimeters",
+            "square-decimeters",
+            "square-feet",
+            "square-inches",
+            "square-kilometers",
+            "square-meters",
+            "square-miles",
+            "square-millimeters",
+            "square-us-feet",
+            "square-yards"
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-basemap-gallery",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-basemap-layer-list",
+    "parameters": [
+      [
+        {
+          "name": "basemapTitle",
+          "type": "text",
+          "defaultValue": "BasemapLayerList"
+        }
+      ],
+      [
+        {
+          "name": "editingEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "mulitpleSelectionEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-basemap-toggle",
+    "parameters": [
+      [
+        {
+          "name": "nextBasemap",
+          "type": "select",
+          "options": [
+            "oceans",
+            "streets-night-vector"
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-bookmarks",
+    "parameters": [
+      [
+        {
+          "name": "editingEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-building-explorer",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-compass",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-coordinate-conversion",
+    "parameters": [
+      [
+        {
+          "name": "mode",
+          "type": "radio",
+          "options": [
+            "live",
+            "capture"
+          ],
+          "defaultValue": "live"
+        }
+      ],
+      [
+        {
+          "name": "orientation",
+          "type": "select",
+          "options": [
+            "auto",
+            "expand-up",
+            "expand-down"
+          ],
+          "defaultValue": "auto"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-daylight",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-directions",
+    "parameters": [
+      [
+        {
+          "name": "apiKey",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "name": "routeLayerItemId",
+          "type": "text"
+        }
+      ],
+      [
+        {
+          "name": "maxStops",
+          "type": "number"
+        }
+      ],
+      [
+        {
+          "name": "unit",
+          "type": "select",
+          "options": [
+            "centimeters",
+            "decimeters",
+            "feet",
+            "imperial",
+            "inches",
+            "kilometers",
+            "meters",
+            "metric",
+            "miles",
+            "millimeters",
+            "nautical-miles",
+            "square-yards"
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-directline-measurement-3d",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-distance-measurement-2d",
+    "parameters": [
+      [
+        {
+          "name": "unit",
+          "type": "select",
+          "options": [
+            "centimeters",
+            "decimeters",
+            "feet",
+            "imperial",
+            "inches",
+            "kilometers",
+            "meters",
+            "metric",
+            "miles",
+            "millimeters",
+            "nautical-miles",
+            "square-yards"
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-editor",
+    "parameters": [
+      [
+        {
+          "name": "allowedWorkflows",
+          "type": "inline-check",
+          "options": [
+            "create",
+            "create-features",
+            "update"
+          ]
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-elevation-profile",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-expand",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-feature",
+    "parameters": [
+      [
+        {
+          "name": "defaultPopupTemplateEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-feature-table",
+    "parameters": [
+      [
+        {
+          "name": "attachmentsEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "autoRefreshEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "columnReorderingEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "editingEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "highlightEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "itemId",
+          "type": "text",
+          "defaultValue": ""
+        }
+      ],
+      [
+        {
+          "name": "multiSortEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "pageSize",
+          "type": "number"
+        }
+      ],
+      [
+        {
+          "name": "state",
+          "type": "select",
+          "options": [
+            "disabled",
+            "loaded",
+            "loading",
+            "ready"
+          ]
+        }
+      ],
+      [
+        {
+          "name": "url",
+          "type": "text",
+          "defaultValue": ""
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-features",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-floor-filter",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-fullscreen",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-home",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-layer-list",
+    "parameters": [
+      [
+        {
+          "name": "selectionEnabled",
+          "type": "boolean",
+          "defaultValue": true
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-legend",
+    "parameters": [
+      [
+        {
+          "name": "legendStyle",
+          "type": "radio",
+          "options": [
+            "classic",
+            "card"
+          ],
+          "defaultValue": "classic"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-line-of-sight",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-locate",
+    "parameters": [
+      [
+        {
+          "name": "goToLocationEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "popupEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "scale",
+          "type": "number",
+          "defaultValue": 5000
+        }
+      ],
+      [
+        {
+          "name": "useHeadingEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-map",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-navigation-toggle",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-print",
+    "parameters": [
+      [
+        {
+          "name": "allowedFormats",
+          "type": "inline-check",
+          "options": [
+            "all",
+            "pdf",
+            "png32",
+            "png8",
+            "jpg",
+            "gif",
+            "eps",
+            "svg",
+            "svgz",
+            "aix",
+            "tiff"
+          ],
+          "defaultValue": "all"
+        }
+      ],
+      [
+        {
+          "name": "allowedLayouts",
+          "type": "inline-check",
+          "options": [
+            "all",
+            "map-only",
+            "a3-landscape",
+            "a3-portrait",
+            "a4-landscape",
+            "a4-portrait",
+            "letter-ansi-a-landscape",
+            "letter-ansi-a-portrait",
+            "tabloid-ansi-b-landscape",
+            "tabloid-ansi-b-portrait"
+          ],
+          "defaultValue": "all"
+        }
+      ],
+      [
+        {
+          "name": "includeDefaultTemplates",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "printServiceUrl",
+          "type": "text"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-scale-bar",
+    "parameters": [
+      [
+        {
+          "name": "barStyle",
+          "type": "radio",
+          "options": [
+            "line",
+            "ruler"
+          ],
+          "defaultValue": "line"
+        }
+      ],
+      [
+        {
+          "name": "unit",
+          "type": "radio",
+          "options": [
+            "dual",
+            "imperial",
+            "metric"
+          ],
+          "defaultValue": "dual"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-scale-range-slider",
+    "parameters": [
+      [
+        {
+          "name": "maxScale",
+          "type": "number"
+        }
+      ],
+      [
+        {
+          "name": "maxScaleLimit",
+          "type": "number"
+        }
+      ],
+      [
+        {
+          "name": "minScale",
+          "type": "number"
+        }
+      ],
+      [
+        {
+          "name": "minScaleLimit",
+          "type": "number"
+        }
+      ],
+      [
+        {
+          "name": "region",
+          "type": "select",
+          "options": [
+            "AE",
+            "AR",
+            "AT",
+            "AU",
+            "BE",
+            "BG",
+            "BO",
+            "BR",
+            "CA",
+            "CH",
+            "CI",
+            "CL",
+            "CN",
+            "CO",
+            "CR",
+            "CZ",
+            "DE",
+            "DK",
+            "EE",
+            "EG",
+            "ES",
+            "FI",
+            "FR",
+            "GB",
+            "GL",
+            "GR",
+            "GT",
+            "HK",
+            "ID",
+            "IE",
+            "IL",
+            "IN",
+            "IQ",
+            "IS",
+            "IT",
+            "JP",
+            "KE",
+            "KR",
+            "KW",
+            "LI",
+            "LT",
+            "LU",
+            "LV",
+            "MA",
+            "MG",
+            "ML",
+            "MO",
+            "MX",
+            "MY",
+            "NI",
+            "NL",
+            "NO",
+            "NZ",
+            "PE",
+            "PL",
+            "PR",
+            "PT",
+            "RO",
+            "RU",
+            "RW",
+            "SE",
+            "SG",
+            "SK",
+            "SR",
+            "SV",
+            "TH",
+            "TN",
+            "TW",
+            "US",
+            "VE",
+            "VI",
+            "ZA"
+          ],
+          "defaultValue": "US"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-scene",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-search",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-shadow-cast",
+    "parameters": [
+      [
+        {
+          "name": "headingLevel",
+          "type": "number",
+          "defaultValue": 4
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-sketch",
+    "parameters": [
+      [
+        {
+          "name": "creationMode",
+          "type": "select",
+          "options": [
+            "continuous",
+            "single",
+            "update"
+          ],
+          "defaultValue": "continuous"
+        }
+      ],
+      [
+        {
+          "name": "layout",
+          "type": "select",
+          "options": [
+            "horizontal",
+            "vertical"
+          ],
+          "defaultValue": "horizontal"
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-slice",
+    "parameters": [
+      [
+        {
+          "name": "headingLevel",
+          "type": "number",
+          "defaultValue": 3
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-swipe",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-table-list",
+    "parameters": [
+      [
+        {
+          "name": "multipleSelectionEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ],
+      [
+        {
+          "name": "selectionEnabled",
+          "type": "boolean",
+          "defaultValue": false
+        }
+      ]
+    ]
+  },
+  {
+    "name": "arcgis-time-slider",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-track",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-utility-network-associations",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-utility-network-trace",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-utility-network-validate-topology",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-value-picker",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-weather",
+    "parameters": []
+  },
+  {
+    "name": "arcgis-zoom",
+    "parameters": []
+  }
+]
