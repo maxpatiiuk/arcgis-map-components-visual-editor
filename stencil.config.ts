@@ -5,8 +5,8 @@ import autoprefixer from 'autoprefixer';
 // https://stenciljs.com/docs/config
 
 export const config: Config = {
+  namespace: 'vis',
   globalStyle: 'src/global/app.css',
-  taskQueue: 'async',
   outputTargets: [
     {
       type: 'www',

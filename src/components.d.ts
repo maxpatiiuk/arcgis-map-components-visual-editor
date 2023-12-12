@@ -5,59 +5,79 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
+import { BaseMap } from "./components/map-selection/types";
+export { BaseMap } from "./components/map-selection/types";
 export namespace Components {
-    interface AppHome {
+    interface VisMap {
+        "baseMap": BaseMap;
     }
-    interface AppMap {
+    interface VisMapSelection {
     }
-    interface AppRoot {
+    interface VisRoot {
     }
 }
+export interface VisMapSelectionCustomEvent<T> extends CustomEvent<T> {
+    detail: T;
+    target: HTMLVisMapSelectionElement;
+}
 declare global {
-    interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
+    interface HTMLVisMapElement extends Components.VisMap, HTMLStencilElement {
     }
-    var HTMLAppHomeElement: {
-        prototype: HTMLAppHomeElement;
-        new (): HTMLAppHomeElement;
+    var HTMLVisMapElement: {
+        prototype: HTMLVisMapElement;
+        new (): HTMLVisMapElement;
     };
-    interface HTMLAppMapElement extends Components.AppMap, HTMLStencilElement {
+    interface HTMLVisMapSelectionElementEventMap {
+        "baseMapSelected": BaseMap;
     }
-    var HTMLAppMapElement: {
-        prototype: HTMLAppMapElement;
-        new (): HTMLAppMapElement;
+    interface HTMLVisMapSelectionElement extends Components.VisMapSelection, HTMLStencilElement {
+        addEventListener<K extends keyof HTMLVisMapSelectionElementEventMap>(type: K, listener: (this: HTMLVisMapSelectionElement, ev: VisMapSelectionCustomEvent<HTMLVisMapSelectionElementEventMap[K]>) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions): void;
+        addEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLVisMapSelectionElementEventMap>(type: K, listener: (this: HTMLVisMapSelectionElement, ev: VisMapSelectionCustomEvent<HTMLVisMapSelectionElementEventMap[K]>) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof DocumentEventMap>(type: K, listener: (this: Document, ev: DocumentEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener<K extends keyof HTMLElementEventMap>(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | EventListenerOptions): void;
+        removeEventListener(type: string, listener: EventListenerOrEventListenerObject, options?: boolean | EventListenerOptions): void;
+    }
+    var HTMLVisMapSelectionElement: {
+        prototype: HTMLVisMapSelectionElement;
+        new (): HTMLVisMapSelectionElement;
     };
-    interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
+    interface HTMLVisRootElement extends Components.VisRoot, HTMLStencilElement {
     }
-    var HTMLAppRootElement: {
-        prototype: HTMLAppRootElement;
-        new (): HTMLAppRootElement;
+    var HTMLVisRootElement: {
+        prototype: HTMLVisRootElement;
+        new (): HTMLVisRootElement;
     };
     interface HTMLElementTagNameMap {
-        "app-home": HTMLAppHomeElement;
-        "app-map": HTMLAppMapElement;
-        "app-root": HTMLAppRootElement;
+        "vis-map": HTMLVisMapElement;
+        "vis-map-selection": HTMLVisMapSelectionElement;
+        "vis-root": HTMLVisRootElement;
     }
 }
 declare namespace LocalJSX {
-    interface AppHome {
+    interface VisMap {
+        "baseMap": BaseMap;
     }
-    interface AppMap {
+    interface VisMapSelection {
+        "onBaseMapSelected"?: (event: VisMapSelectionCustomEvent<BaseMap>) => void;
     }
-    interface AppRoot {
+    interface VisRoot {
     }
     interface IntrinsicElements {
-        "app-home": AppHome;
-        "app-map": AppMap;
-        "app-root": AppRoot;
+        "vis-map": VisMap;
+        "vis-map-selection": VisMapSelection;
+        "vis-root": VisRoot;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
-            "app-map": LocalJSX.AppMap & JSXBase.HTMLAttributes<HTMLAppMapElement>;
-            "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "vis-map": LocalJSX.VisMap & JSXBase.HTMLAttributes<HTMLVisMapElement>;
+            "vis-map-selection": LocalJSX.VisMapSelection & JSXBase.HTMLAttributes<HTMLVisMapSelectionElement>;
+            "vis-root": LocalJSX.VisRoot & JSXBase.HTMLAttributes<HTMLVisRootElement>;
         }
     }
 }

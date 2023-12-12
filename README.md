@@ -1,4 +1,4 @@
-# Stencil App Starter
+# ArcGIS Maps SDK for JavaScript - Visual Builder for components
 
 A small demo app implementing a visual builder for the ArcGIS Maps SDK for
 JavaScript components

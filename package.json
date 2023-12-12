@@ -2,7 +2,7 @@
   "name": "js-api-visual-builder",
   "private": true,
   "version": "0.0.1",
-  "description": "Stencil App Starter",
+  "description": "ArcGIS Maps SDK for JavaScript - Visual Builder for components",
   "scripts": {
     "build": "stencil build",
     "start": "stencil build --dev --watch --serve",
@@ -17,7 +17,6 @@
     "@stencil/core": "4.7.2"
   },
   "devDependencies": {
-    "@stencil-community/router": "^1.0.2",
     "@stencil/core": "4.7.2",
     "@stencil/postcss": "^2.1.0",
     "@types/jest": "^27.0.3",
